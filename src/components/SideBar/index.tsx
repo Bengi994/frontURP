@@ -96,6 +96,9 @@ export const SideBar = () => {
                 <Link className="nav-link" href="/relacion-conferencias">
                   VER RELACIÓN DE CONFERENCIAS
                 </Link>
+                <Link className="nav-link" href="/convalidar-conferencia-A">
+                Convalidar Conferencias
+              </Link>
               </li>
             </>
           )
