@@ -44,7 +44,7 @@ const Catalogo = () => {
                           <td>{catalog.id}</td>
                           <td>{catalog.tema_conferencia}</td>
                           <td>{catalog.fecha ? new Date(catalog.fecha).toLocaleDateString('es-PE',{timeZone: 'UTC'}) : ""}</td>
-                          <td>{catalog?.salon ? catalog?.salon.data?.nombre: ""}</td>
+                          <td>{catalog?.salon.data.attributes.nombre ? catalog?.salon.data.attributes.nombre : ""}</td>
                           <td>{catalog.disponible === null
                       ? "En Espera"
                       : catalog.disponible == false

@@ -84,18 +84,77 @@ export const BuscadorRepo = () => {
       fechaConferencia.setDate(fechaConferencia.getDate() + 1);
       console.log(user?.codigo);
       let flag = false;
-      //NO FUNCIONA EL NO ASISTIO, FALTA VALIDARLO BIEN
-      // FALTA HACER UN ELIMINAR FILTROS
       if(opcionSeleccionada == "Asistió"){
-        flag = catalog.inscripciones.some(inscripcion => (inscripcion.asistencia === "Sí" && inscripcion.codigo == user?.codigo && opcionSeleccionada == "Asistió"));
+        if(catalog.inscripciones != null){
+          flag = catalog.inscripciones.some(inscripcion => (inscripcion.asistencia === "Sí" && inscripcion.codigo == user?.codigo && opcionSeleccionada == "Asistió"));
+        }
         return flag;
       }
       else if(opcionSeleccionada == "No asistió"){
-        flag = catalog.inscripciones.some(inscripcion => ((inscripcion.codigo != user?.codigo && fechaConferencia < fecha && inscripcion.asistencia == "No")));
+        if(catalog.inscripciones != null){
+          // flag = catalog.inscripciones.some(inscripcion => ((inscripcion.codigo != user?.codigo && fechaConferencia < fecha && inscripcion.asistencia == "No")));
+          catalog.inscripciones.forEach(inscripcion => {
+            if(inscripcion.codigo != user?.codigo && fechaConferencia < fecha){
+              flag = true;
+            }
+            else if(inscripcion.codigo == user?.codigo && fechaConferencia < fecha && inscripcion.asistencia == "No"){
+              flag = true;
+            }
+          })
+        }
         return flag;
       }
       else if(opcionSeleccionada == "Pendiente"){
-        flag = catalog.inscripciones.some(inscripcion => (fechaConferencia > fecha))
+        if(catalog.inscripciones != null){
+          // flag = catalog.inscripciones.some(inscripcion => (fechaConferencia > fecha && inscripcion.asistencia == "No"))
+          catalog.inscripciones.forEach(inscripcion => {
+            if(inscripcion.codigo != user?.codigo && fechaConferencia > fecha){
+              flag = true;
+            }
+            else if(inscripcion.codigo == user?.codigo && inscripcion.asistencia == "No" && fechaConferencia > fecha){
+              flag = true;
+            }
+          })
+        }
+        else{
+          flag = true;
+        }
+        return flag;
+      }
+      else if(opcionSeleccionada == "Ingeniería Informática"){
+        if(catalog.dirigido == "Ingeniería informática"){
+          flag = true;
+        }
+        return flag;
+      }
+      else if(opcionSeleccionada == "Ingeniería Industrial"){
+        if(catalog.dirigido == "Ingeniería industrial"){
+          flag = true;
+        }
+        return flag;
+      }
+      else if(opcionSeleccionada == "Todas las carreras"){
+        if(catalog.dirigido == "Todas las carreras"){
+          flag = true;
+        }
+        return flag;
+      }
+      else if(opcionSeleccionada == "2"){
+        if(fecha.getFullYear() == fechaConferencia.getFullYear()){
+          flag = true;
+        }
+        return flag;
+      }
+      else if(opcionSeleccionada == "3"){
+        if(fecha.getMonth() == fechaConferencia.getMonth()){
+          flag = true;
+        }
+        return flag;
+      }
+      else if(opcionSeleccionada == "4"){
+        if(fecha.getMonth() == fechaConferencia.getMonth()){
+          flag = true;
+        }
         return flag;
       }
     });
@@ -129,9 +188,9 @@ export const BuscadorRepo = () => {
         <div className="filtrado-comboBox-seccion">
           <select id="carrera" value={opcionSeleccionada} onChange={handleChange2}>
             <option value="1">Filtrado por carrera</option>
-            <option value="2">Ingeniería Informática</option>
-            <option value="3">Ingeniería Industrial</option>
-            <option value="4">Ingeniería Civil</option>
+            <option value="Ingeniería Informática">Ingeniería Informática</option>
+            <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+            <option value="Todas las carreras">Todas las carreras</option>
           </select>
         </div>
         <div className="filtrado-comboBox-seccion">
