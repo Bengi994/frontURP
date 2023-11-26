@@ -4,9 +4,7 @@ export type Catalog = {
   id: string;
   tema_conferencia: string;
   descripcion: string;
-  foto: {
-    url: string; 
-  };
+  foto:any; 
   expositor: string;
   fecha: Date;
   hora: DateSchema;

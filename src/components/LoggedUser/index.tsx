@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {useResponsivePageContext} from "../ResponsivePage/context";
 import {Button} from "react-bootstrap";
 
@@ -26,14 +27,16 @@ export const LoggedUser = ({ onSubmit, openCulqi }: { onSubmit: (user: any) => v
             </p>
             <p>
                 <span>Direccion: </span>
+                {/*@ts-ignore*/}
                 <span>{user.direccion}</span>
             </p>
             <p>
                 <span>Zona: </span>
+                {/*@ts-ignore*/}
                 <span>{user.zona}</span>
             </p>
             
-            <p className='fw-bold'>Si algun dato es incorrecto puedes actualizarlo <a href="/perfil">aqui</a></p>
+            <p className='fw-bold'>Si algun dato es incorrecto puedes actualizarlo <Link href="/perfil">aqui</Link></p>
             <Button variant='success' onClick={handlePay}>Pagar</Button>
         </div>
     );

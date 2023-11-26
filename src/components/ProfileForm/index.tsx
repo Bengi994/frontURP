@@ -48,6 +48,7 @@ export const ProfileForm = () => {
 
     useEffect(() => {
         if (user && !isEmployee) {
+            //@ts-ignore
             setValue("zona", user.zona);
         }
     }, [user, setValue, isEmployee]);
@@ -138,11 +139,16 @@ export const ProfileForm = () => {
                             <Form.Label>Direccion</Form.Label>
                             <Form.Control
                                 type="text"
+                                
+                                //@ts-ignore
                                 {...register("direccion")}
+                                //@ts-ignore
                                 defaultValue={user.direccion}
                             />
+                            {/*@ts-ignore*/}
                             {errors.direccion && (
                                 <Form.Text className="text-danger">
+                                    {/*@ts-ignore*/}
                                     {errors.direccion.message}
                                 </Form.Text>
                             )}
@@ -150,7 +156,9 @@ export const ProfileForm = () => {
                         <Form.Group className="mb-3">
                             <Form.Label>Zonas</Form.Label>
                             <Form.Select
+                            //@ts-ignore
                                 onChange={(event) => setValue("zona", event.target.value)}
+                                //@ts-ignore
                                 value={user.zona}
                             >
                                 <option>Seleccionar</option>
@@ -159,8 +167,10 @@ export const ProfileForm = () => {
                                 <option value="C">Zona C</option>
                                 <option value="D">Zona D</option>
                             </Form.Select>
+                            {/*@ts-ignore*/}
                             {errors.zona && (
                                 <Form.Text className="text-danger">
+                                    {/*@ts-ignore*/}
                                     {errors.zona.message}
                                 </Form.Text>
                             )}

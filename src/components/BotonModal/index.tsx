@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Catalog, Inscripcion } from "../../types/Catalog";
@@ -11,7 +12,7 @@ import { useCatalogs } from '../../hooks/catalog/useCatalogs';
 import { useUsers } from '../../hooks/user/useUsers';
 import { url } from 'inspector';
 import axios from 'axios';
-
+//@ts-ignore
 function formatearFecha(fechaOriginal) {
     const fecha = new Date(fechaOriginal);
     fecha.setDate(fecha.getDate() + 1);
@@ -21,11 +22,13 @@ function formatearFecha(fechaOriginal) {
   
     return `${dia} de ${mes}`;
   }
-
-const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo, estadoModalQR, cambiarEstadoQR}) => {
+//@ts-ignore
+const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo}) => {
     const { user } = useResponsivePageContext();
     const { updateUser} = useUsers();
     const { register, handleSubmit, formState: { errors } } = useForm<Catalog>();
+
+    const [estadoModal, cambiarEstadoModal] = useState(false);
   
     const { updateCatalog } = useCatalog(); // Asegúrate de importar la función updateCatalog correctamente.
   
@@ -75,11 +78,13 @@ const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo, estadoMo
 
       function modificarInscripciones(listaDeAlumnos:any) {
         if(listaDeAlumnos?.length == 0){
+          //@ts-ignore
           listaDeAlumnos.push(nuevoAlumno);
         }
         else{
           listaDeAlumnos.forEach(alumno => {
             if(alumno.codigo != nuevoAlumno.codigo) {
+              //@ts-ignore
               listaDeAlumnos.push(nuevoAlumno);
             }
             else{
@@ -102,7 +107,7 @@ const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo, estadoMo
       if (response) {
         console.log("Nuevo alumno registrado con éxito:", response);
         // Realiza cualquier otra acción necesaria después de la actualización.
-        cambiarEstadoQR(!estadoModalQR);
+        cambiarEstadoModal(!estadoModal);
       } else {
         console.error("Error al registrar al nuevo alumno.");
       }

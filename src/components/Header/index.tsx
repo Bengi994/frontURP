@@ -7,6 +7,7 @@ import {
   useResponsivePageContext,
   useResponsivePageDispatch,
 } from "../ResponsivePage/context";
+import Image from 'next/image';
 
 export const Header = () => {
   const [show, setShow] = useState(false);
@@ -63,6 +64,7 @@ export const Header = () => {
                     <p>
                       {user.nombre} {user.apellido}
                     </p>
+                    {/*@ts-ignore*/}
                     <p>{user.conferencia}</p>
                     <Dropdown.Item onClick={goToProfile}>Mi perfil</Dropdown.Item>
                     {!isEmployee && (

@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {api} from "../../utils/api";
 import qs from "qs";
+{/*@ts-ignore*/}
 import {Order} from "../../types/Order";
 
 export const useMyOrders = (userId: number | undefined) => {

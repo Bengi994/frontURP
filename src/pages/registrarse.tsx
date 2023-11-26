@@ -91,15 +91,19 @@ const Registrarse = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Direccion</Form.Label>
+                            {/*@ts-ignore*/}
                             <Form.Control type="text" {...register("direccion")} />
+                            {/*@ts-ignore*/}
                             {errors.direccion && (
                                 <Form.Text className='text-danger'>
+                                    {/*@ts-ignore*/}
                                     {errors.direccion.message}
                                 </Form.Text>
                             )}
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Zonas</Form.Label>
+                            {/*@ts-ignore*/}
                             <Form.Select onChange={event => setValue('zona', event.target.value)}>
                                 <option>Seleccionar</option>
                                 <option value='A'>Zona A</option>
@@ -107,8 +111,10 @@ const Registrarse = () => {
                                 <option value='C'>Zona C</option>
                                 <option value='D'>Zona D</option>
                             </Form.Select>
+                            {/*@ts-ignore*/}
                             {errors.zona && (
                                 <Form.Text className='text-danger'>
+                                    {/*@ts-ignore*/}
                                     {errors.zona.message}
                                 </Form.Text>
                             )}

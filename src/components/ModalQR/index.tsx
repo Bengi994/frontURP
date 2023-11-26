@@ -5,8 +5,10 @@ import { useResponsivePageContext } from "../ResponsivePage/context";
 import React from "react";
 import ReactDOM from "react-dom";
 import QRCode from "react-qr-code";
+import Image from 'next/image';
 //npm i react-qr-code
 //npm i react-native-svg
+{/*@ts-ignore*/}
 const ModalQR = ({ estado, cambiarEstado }) => {
   const { user } = useResponsivePageContext();
 
@@ -29,7 +31,8 @@ const ModalQR = ({ estado, cambiarEstado }) => {
               <br />
               <QRCode
                 className="codigoQR"
-                value={user?.codigo}
+                
+                value={user?.codigo||""}
                 viewBox={`0 0 256 256`}
                 fgColor="black"
               />

@@ -7,6 +7,7 @@ export const useUser = () => {
 
     const getRoles = async () => {
         const { data: { roles: rolesRaw } } = await api.get('/users-permissions/roles');
+{/*@ts-ignore*/}
 
         const rolesMapping = rolesRaw.filter((role: any) => ![1, 2, 3].includes(role.id)).map(({id, description}) => ({ id, name: description }))
 

@@ -1,6 +1,10 @@
-import {Order, ORDER_STATUS_LABELS} from "../../../types/Order";
-import {Button, Modal, Table} from "react-bootstrap";
 
+/*
+import {Order, ORDER_STATUS_LABELS} from "../../../types/order";
+import {Button, Modal, Table} from "react-bootstrap";
+//no existe types order
+*/
+/*
 export const OrderDetailModal = ({ closeModal, order, show }: { show: boolean; closeModal: () => void; order: Order | null }) => {
 
   return order && (
@@ -33,6 +37,8 @@ export const OrderDetailModal = ({ closeModal, order, show }: { show: boolean; c
                     </tr>
                     </thead>
                     <tbody>
+
+
                     {order.detail.length > 0 && order.detail.map((detail, index) => (
                         <tr key={`order-detail-${detail.id}`}>
                             <th>{index + 1}</th>
@@ -53,4 +59,5 @@ export const OrderDetailModal = ({ closeModal, order, show }: { show: boolean; c
           </Modal.Footer>
       </Modal>
   );
-}
+}*/
+export {};

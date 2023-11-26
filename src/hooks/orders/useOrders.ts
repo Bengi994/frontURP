@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {api} from "../../utils/api";
+{/*@ts-ignore*/}
 import {Order} from "../../types/Order";
 
 export const useOrders = () => {

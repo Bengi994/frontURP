@@ -7,6 +7,7 @@ import {useLogin} from "../hooks/login/useLogin";
 import {User} from "../types/User";
 import {useState} from "react";
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 const loginSchema = yup.object({
     email: yup.string().required('El email es requerido').email('EL email tiene que tener el siguiente formato ejemplo@ejemplo.com'),
@@ -71,8 +72,8 @@ const IniciarSesion = (props: { user?: User }) => {
                     </Form>
                     
                     <hr />
-                    <p className="enlace-extra-login">Aun no tienes una cuenta? ingresa <a href="/registrarse">aqui</a></p>
-                <p className="enlace-extra-login">Olvidaste tu contraseña? ingresa <a href="/olvidaste-contrasena">aqui</a></p>
+                    <p className="enlace-extra-login">Aun no tienes una cuenta? ingresa <Link href="/registrarse">aqui</Link></p>
+                <p className="enlace-extra-login">Olvidaste tu contraseña? ingresa <Link href="/olvidaste-contrasena">aqui</Link></p>
                     </div>
 
                 </div>

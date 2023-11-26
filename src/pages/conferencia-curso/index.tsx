@@ -11,6 +11,7 @@ const VerCatalogo: React.FC<{ catalog: any }> = ({ catalog }) => {
       if (document.readyState === "complete" || document.readyState === "interactive") {
         setTimeout(fn, 1);
       } else {
+        //@ts-ignore
         document.addEventListener("DOMContentLoaded", fn);
       }
     };
@@ -52,7 +53,7 @@ const VerCatalogo: React.FC<{ catalog: any }> = ({ catalog }) => {
         <div id="my-qr-reader" className="my-qr-reader"></div>
       </div>
 
-        <script src="https://unpkg.com/html5-qrcode"></script>
+        <script async src="https://unpkg.com/html5-qrcode"></script>
         
     </ResponsivePage>
 

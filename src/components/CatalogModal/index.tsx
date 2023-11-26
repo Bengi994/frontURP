@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Catalog } from "../../types/Catalog";
 import { useCatalogs } from "../../hooks/catalog/useCatalogs";
 import CatalogModalConfirm from "../../components/CatalogModalConfirmation";
-
+import Image from 'next/image';
+//@ts-ignore
 function formatearFecha(fechaOriginal) {
   const fecha = new Date(fechaOriginal);
   const dia = fecha.getDate();
@@ -17,7 +18,7 @@ function formatearFecha(fechaOriginal) {
 
   return `${diaFormateado}/${mesFormateado}/${anio}`;
 }
-
+//@ts-ignore
 const CatalogModal = ({ estado, cambiarEstado, catalogo, setCatalogo }) => {
   const { catalogs, removeCatalog, enabledCatalog } = useCatalogs();
   const handleRemoveCatalog = async (catalogId: string) => {

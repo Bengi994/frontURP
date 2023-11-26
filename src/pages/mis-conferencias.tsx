@@ -2,6 +2,7 @@ import { ResponsivePage } from "../components/ResponsivePage";
 import { TotalConferencia } from "../components/TotalConferencia";
 import Link from "next/link";
 import ProximasConfes from "../components/ProximasConfes";
+import Image from 'next/image';
 
 const VerCatalogo = () => {
   return (
@@ -27,8 +28,8 @@ const VerCatalogo = () => {
     </ResponsivePage>
   );
 };
-<script src="sweetalert2.min.js"></script>;
+/*<script src="sweetalert2.min.js"></script>;
 <link rel="stylesheet" href="sweetalert2.min.css"></link>;
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>;
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>;*/
 
 export default VerCatalogo;

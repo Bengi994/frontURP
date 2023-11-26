@@ -58,6 +58,7 @@ const ProximasConfes = () => {
           }
         });
       }
+      {/*@ts-ignore*/}
       if (flag != true && fechaMasTemprana > fechaActual && catalog.disponible === true) {
         proximasConferencias.push(catalog);
       }

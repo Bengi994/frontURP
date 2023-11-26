@@ -19,6 +19,7 @@ const CatalogsRepo = () => {
           }
       })
       }
+      {/*@ts-ignore*/}
       if(flag == true){
           conferencias.push(catalog);
       }

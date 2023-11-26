@@ -3,6 +3,7 @@ import { Catalog } from "../../types/Catalog";
 import { useResponsivePageContext } from "../ResponsivePage/context";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Image from 'next/image';
 
 export const CatalogCardInscrito = ({ catalog }: { catalog: Catalog }) => {
   const { user } = useResponsivePageContext();
@@ -80,17 +81,21 @@ export const CatalogCardInscrito = ({ catalog }: { catalog: Catalog }) => {
           <p className="card-inscrito-texto">
             <img src="\calendario-icon-black.svg" alt="fecha" />
             {catalog.fecha} -{" "}
+            {/*@ts-ignore*/}
             {catalog.hora === null ? "" : catalog.hora.slice(0, 5)}
           </p>
 
           <p className="card-inscrito-texto">
-            <img src="\salon-icon-black.svg" alt="salon" />
+            <Image src="\salon-icon-black.svg" alt="salon" />
             {catalog?.salon.data?.attributes?.nombre === null ? "" : catalog.salon.data?.attributes?.nombre}
           </p>
         </div>
+        
         <div className="card-inscrito-seccion-boton">
+          
           {catalog.repositorio ? (
-            <a href={catalog.repositorio} targetet="_blank">VER MATERIAL</a>
+            
+            <a href={catalog.repositorio} target="_blank" rel="noopener noreferrer">VER MATERIAL</a>
           ) : (
             <span>MATERIAL NO DISPONIBLE</span>
           )}
@@ -98,6 +103,6 @@ export const CatalogCardInscrito = ({ catalog }: { catalog: Catalog }) => {
       </div>
     </Card.Body>
   </Card>
-    
+    //target decia targetet
   );
 };

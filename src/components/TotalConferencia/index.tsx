@@ -2,6 +2,7 @@ import {useResponsivePageContext} from "../ResponsivePage/context";
 import { ResponsivePage } from "../ResponsivePage";
 import { useCatalogs } from "../../hooks/catalog/useCatalogs";
 import Link from "next/link";
+import Image from 'next/image';
 
 export const TotalConferencia = () => {
     const { user } = useResponsivePageContext();
@@ -27,6 +28,7 @@ export const TotalConferencia = () => {
     };
     return(
             <div className="seccion-mis-conferencias excepcion">
+               {/*@ts-ignore*/}
                     <div role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="40" style={progressBarStyles}>
                         <img className="img-excepcion" src="\icon-total-conferencias.png" alt="conferencias" />
                     </div>

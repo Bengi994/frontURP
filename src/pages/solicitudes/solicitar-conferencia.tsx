@@ -26,37 +26,49 @@ import { Salon } from "../../types/Salon";
 import { number } from "yup";
 
 const NewCatalog = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<Catalog>();
-
-  const [isAvailable, setIsAvailable] = useState(false); // Cambiamos el valor por defecto a "no disponible"
-  const { createCatalog } = useCatalog();
-  const { catalogs } = useCatalogs();
-  const router = useRouter();
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  //const [salonConferencia, setSalonConferencias] = useState<{ nombre: string; }[]>([]);
-  //const { getSalonConferencias } = useSalonConferencia();
-  const [salonId, setSalonId] = useState<number>(0);
+    const { register, handleSubmit, formState: { errors },setValue } = useForm<Catalog>();
+    
+    
+    const [isAvailable, setIsAvailable] = useState(false); // Cambiamos el valor por defecto a "no disponible"
+    const [showModal, setShowModal] = useState(false);
+    const { createCatalog } = useCatalog();
+    const { catalogs } = useCatalogs();
+    const router = useRouter();
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    //const [salonConferencia, setSalonConferencias] = useState<{ nombre: string; }[]>([]);
+    //const { getSalonConferencias } = useSalonConferencia();
+    const [salonId, setSalonId] = useState<number>(0);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    
 
   const { SalonConferencia, getSalonConferencia } = useSalonConferencia();
 
   const handleSwitch = () => setIsAvailable(!isAvailable);
 
-  const handleOnSubmit = async (data: any) => {
-    const catalog = {
-      ...data,
-      fecha: selectedDate,
-    };
-    const response = await createCatalog(catalog, data.foto);
+    const handleOnSubmit = async (data: any) => {
+        try {
+        const catalog = {
+            ...data,
+            fecha: selectedDate,
+        };
+{/*@ts-ignore*/}
+        const response = await createCatalog(catalog);
 
-    if (response) {
-      await router.push("/solicitudes");
+        if (response) {
+            await router.push('/solicitudes');
+        }
+    } catch (error) {
+        //@ts-ignore
+        if (error.response && error.response.status === 400) {
+            //@ts-ignore
+            setErrorMessage(error.response.data.message);
+            //@ts-ignore
+            console.log('Mensaje de error:', error.response.data.message);
+        } else {
+            console.error('Error desconocido:', error);
+        }
     }
-  };
+    };
 
   const diasNoHabiles = useMemo(() => {
     const dias = catalogs.reduce((acc: Record<number, Date[]>, catalogs) => {
@@ -128,105 +140,114 @@ const NewCatalog = () => {
     },
   ];
 
-  return (
-    <ResponsivePage>
-      <div className="container mt-3">
-        <div className="d-flex justify-content-between">
-          <h1 className="mb-2">Nueva solicitud</h1>
-        </div>
-        <hr />
-        <div className="">
-          <Form
-            className="envio-solicitud-form"
-            onSubmit={handleSubmit(handleOnSubmit)}
-          >
-            <Form.Group controlId="formFileSm" className="mb-3">
-              <Form.Label>Foto</Form.Label>
-              <Form.Control type="file" size="sm" />
-            </Form.Group>
-            <Form.Group className="form-group mb-3">
-              <Form.Label>Tema de la conferencia</Form.Label>
-              <Form.Control type="text" {...register("tema_conferencia")} />
-              {errors.tema_conferencia && (
-                <Form.Text className="text-danger">
-                  {errors.tema_conferencia.message}
-                </Form.Text>
-              )}
-            </Form.Group>
-            <Form.Group className="form-group mb-3">
-              <Form.Label>Descripcion</Form.Label>
-              <Form.Control type="text" {...register("descripcion")} />
-              {errors.descripcion && (
-                <Form.Text className="text-danger">
-                  {errors.descripcion.message}
-                </Form.Text>
-              )}
-            </Form.Group>
-            <Form.Group className="form-group mb-3">
-              <Form.Label>Expositor</Form.Label>
-              <Form.Control type="text" {...register("expositor")} />
-              {errors.expositor && (
-                <Form.Text className="text-danger">
-                  {errors.expositor.message}
-                </Form.Text>
-              )}
-            </Form.Group>
+    return (
+        <ResponsivePage>
+            <div className='container mt-3'>
+                <div className='d-flex justify-content-between'>
+                    <h1 className='mb-2'>Nueva solicitud</h1>
+                </div>
+                <hr />
+                
+                <div className=''>
+                
+                {errorMessage && (
+                        <div className="alert alert-danger" role="alert">
+                            {errorMessage}
+                        </div>
+                    )}
 
-            <Form.Group className="form-group mb-3">
-              <Form.Label style={{ fontWeight: "bold" }}>Salón</Form.Label>
-              <Form.Select
-                onChange={(event) => {
-                  setValue("salons", event.target.value);
-                  setSalonId(Number(event.target.value));
-                }}
-              >
-                <option>Seleccionar</option>
-                {SalonConferencia.map((salon) => {
-                  console.log(salon); // Mueve el console.log aquí para que se ejecute correctamente
-                  return (
-                    <option key={salon.id} value={salon.id}>
-                      {salon.attributes.nombre}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-            </Form.Group>
 
-            <Form.Group className="form-group mb-3">
-              <Form.Label style={{ fontWeight: "bold" }}>Fecha</Form.Label>
-              <DatePicker
-                minDate={new Date()}
-                excludeDates={diasNoHabiles[salonId] || []}
-                className="date-picker"
-                selected={selectedDate}
-                onChange={(date: Date) => setSelectedDate(date)}
-                dateFormat="dd/MM/yyyy"
-              />
-              {errors.fecha && (
-                <Form.Text className="text-danger">
-                  {errors.fecha.message}
-                </Form.Text>
-              )}
-            </Form.Group>
+                    <Form className="envio-solicitud-form" onSubmit={handleSubmit(handleOnSubmit)}>
+                        <Form.Group className="form-group mb-3">
+                            <Form.Label>Tema de la conferencia</Form.Label>
+                            <Form.Control type="text" {...register("tema_conferencia",{required: 'Estecampo es requerido'})} />
+                            {errors.tema_conferencia && (
+                                <Form.Text className='text-danger'>
+                                    {errors.tema_conferencia.message}
+                                </Form.Text>
+                            )}
+                        </Form.Group>
+                        <Form.Group className="form-group mb-3">
+                            <Form.Label>Descripcion</Form.Label>
+                            <Form.Control type="text" {...register("descripcion",{required: 'Estecampo es requerido'})} />
+                            {errors.descripcion && (
+                                <Form.Text className='text-danger'>
+                                    {errors.descripcion.message}
+                                </Form.Text>
+                            )}
+                        </Form.Group>
+                        <Form.Group className="form-group mb-3">
+                            <Form.Label>Expositor</Form.Label>
+                            <Form.Control type="text" {...register("expositor",{required: 'Estecampo es requerido'})} />
+                            {errors.expositor && (
+                                <Form.Text className='text-danger'>
+                                    {errors.expositor.message}
+                                </Form.Text>
+                            )}
+                        </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label style={{ fontWeight: "bold" }}>Hora</Form.Label>
-              <select style={{ borderColor: "green" }} {...register("hora")}>
-                <option value="" disabled>
-                  Seleccionar
-                </option>
-                {horasDelDia.map((hora, index) => (
-                  <option key={index} value={hora.horaValue}>
-                    {hora.horaLabel}
-                  </option>
-                ))}
-              </select>
-              {errors.hora && (
-                <Form.Text className="text-danger">
-                  {errors.hora.message}
-                </Form.Text>
-              )}
-            </Form.Group>
+                        <Form.Group className="form-group mb-3">
+                        <Form.Label style={{ fontWeight: 'bold' }}>Salón</Form.Label>
+                        <Form.Select 
+                        {...register('salon', { required: 'Este campo es requerido' })}
+                        onChange={event => {
+                            setValue('salon', event.target.value)
+                            setSalonId(Number(event.target.value));
+                            console.log('Salón seleccionado:', event.target.value);
+                        }}>
+                        <option>Seleccionar</option>
+                        {SalonConferencia.map((salon) => {
+                        console.log(salon); // Mueve el console.log aquí para que se ejecute correctamente
+                        return (
+                        <option key={salon.id} value={salon.id}>
+                        {salon.attributes.nombre}
+                        </option>
+                        );
+                        })}
+                        </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group className="form-group mb-3">
+                            <Form.Label style={{ fontWeight: 'bold' }} >Fecha</Form.Label>
+                            <DatePicker 
+                            
+                                minDate={new Date()}
+                                excludeDates={diasNoHabiles[salonId] || []}
+                                className="date-picker"
+                                selected={selectedDate} 
+                                onChange={(date: Date) => {
+                                    console.log(date);
+                                    setSelectedDate(date)} }
+                                dateFormat="dd/MM/yyyy" 
+                                />
+                                
+                            {errors.fecha && (
+                                <Form.Text className='text-danger'>
+                                    {errors.fecha.message}
+                                </Form.Text>
+                            )}
+                        </Form.Group>
+
+
+
+                        <Form.Group className="mb-3">
+                            <Form.Label style={{ fontWeight: 'bold' }}>Hora</Form.Label>
+                            <select style={{ borderColor: 'green' }} {...register("hora",{ required: 'Este campo es requerido' })}>
+                                <option value="" disabled>
+                                    Seleccionar
+                                </option>
+                                {horasDelDia.map((hora, index) => (
+                                    <option key={index} value={hora.horaValue}>
+                                        {hora.horaLabel}
+                                    </option>
+                                ))}
+                            </select>
+                            {errors.hora && (
+                                <Form.Text className='text-danger'>
+                                    {errors.hora.message}
+                                </Form.Text>
+                            )}
+                        </Form.Group>
 
             <></>
 

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useResponsivePageContext } from "../ResponsivePage/context";
 import { Button, Dropdown, Accordion } from "react-bootstrap";
+import Image from 'next/image';
+
 export const SideBar = () => {
   const { user } = useResponsivePageContext();
   return (
@@ -53,7 +55,7 @@ export const SideBar = () => {
           )
         }
         {
-          // ROLE 7 DOCENTE
+          // ROLE 3 DOCENTE
           user?.role.id === 3 && (
             <>
             <Accordion defaultActiveKey="0" className="acordeon-confes">
@@ -90,7 +92,7 @@ export const SideBar = () => {
         }
         {
           // ROLE 5 SECRETARIA
-          user?.role.id === 5 && (
+          user?.role.id === 4 && (
             <>
               <li className="nav-item">
                 <Link className="nav-link" href="/relacion-conferencias">

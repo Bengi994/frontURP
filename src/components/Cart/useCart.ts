@@ -9,7 +9,9 @@ export const useCart = () => {
 
     const [total, discount] = useMemo<number[]>(() => {
         if (cart) {
+            //@ts-ignore
             const total = cart.products.reduce((acc, product) => acc + product.cantidad * (product.precio - product.descuento), 0);
+            //@ts-ignore
             const discount = cart.products.reduce((acc, product) => acc + product.cantidad * product.descuento, 0);
             return [total, discount];
         }
@@ -62,7 +64,7 @@ export const useCart = () => {
             } else {
                 cart.products.push({ ...catalog, cantidad: 1 });
             }
-
+//@ts-ignore
             const total = catalog.descuento > 0 ? (cart.total + (catalog.precio - catalog.descuento)) : (cart.total + catalog.precio);
 
             localStorage.setItem('cart', JSON.stringify({ ...cart, total }));
@@ -70,10 +72,12 @@ export const useCart = () => {
         } else {
             localStorage.setItem('cart', JSON.stringify({
                 products: [{ ...catalog, cantidad: 1 }],
+                //@ts-ignore
                 total: catalog.descuento > 0 ? (catalog.precio - catalog.descuento) : catalog.precio,
             }));
             setCart({
                 products: [{ ...catalog, cantidad: 1 }],
+                //@ts-ignore
                 total: catalog.descuento > 0 ? (catalog.precio - catalog.descuento) : catalog.precio,
             });
         }

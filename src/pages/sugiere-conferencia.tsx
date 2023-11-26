@@ -8,6 +8,7 @@ import { useValids } from "../hooks/convalidar/validando";
 import { convalidar } from "../types/valido";
 import { useForm } from "react-hook-form";
 import router, { useRouter } from "next/router";
+import Image from 'next/image';
 
 const VerValidacion = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<convalidar>();

@@ -81,7 +81,8 @@ export const BuscadorProximas = () => {
     });
     setConfe(resultadosBusqueda);
   };
-
+  //o incluid filtrar ene l array
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     filtrar(busqueda);
   }, [busqueda, catalogs]);

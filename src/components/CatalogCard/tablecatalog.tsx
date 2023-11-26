@@ -4,7 +4,7 @@ import { useState } from "react";
 import ModalInscribir from "../BotonModal";
 import TablaInscritos from "../BotonModal/tablainscritos";
 
-
+//@ts-ignore
 function formatearFecha(fechaOriginal) {
   const fecha = new Date(fechaOriginal);
   const dia = fecha.getDate();
@@ -23,6 +23,7 @@ export const CatalogRow = ({ catalog }: { catalog: Catalog }) => {
       <div className="catalog-row-info">
         <span>
           {formatearFecha(catalog.fecha)} -{" "}
+          {/*@ts-ignore*/}
           {catalog.hora ? catalog.hora.slice(0, 5) : ""}
         </span>
         <span>{catalog.salon}</span>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useConvalida } from "../hooks/convalida/useConvalida";
 import { Convalida } from "../types/Convalida";
+import Image from 'next/image';
 
 const VerConvalida = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<Convalida>();
@@ -16,7 +17,7 @@ const VerConvalida = () => {
         const convalida = {
             ...data,
         };
-
+{/*@ts-ignore*/}
         const response = await createConvalida(convalida);
 
         if(response){

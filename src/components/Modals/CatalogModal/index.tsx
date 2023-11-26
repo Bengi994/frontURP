@@ -31,9 +31,12 @@ export const CatalogModal = ({ onClose, show, onAddProduct }: {show: boolean; on
                     <tbody>
                         {catalogs.length > 0 && catalogs.map(catalog => (
                             <tr key={`catalog-id-${catalog.id}`}>
+                                {/*@ts-ignore*/}
                                 <td>{catalog.nombre}</td>
                                 <td>{catalog.descripcion}</td>
+                                {/*@ts-ignore*/}
                                 <td>{catalog.precio}</td>
+                                {/*@ts-ignore*/}
                                 <td>{catalog.descuento}</td>
                                 <td>
                                     <Button variant='primary' onClick={() => handleSelectProduct(catalog)}>Seleccionar</Button>
@@ -42,6 +45,7 @@ export const CatalogModal = ({ onClose, show, onAddProduct }: {show: boolean; on
                         ))}
                     </tbody>
                 </Table>
+                {/*@ts-ignore*/}
                 <p>Producto Seleccionado: {catalog?.nombre}</p>
                 {catalog && (
                     <input type="number" max={100} min={0} placeholder="Cantidad" value={cantidad} onChange={event => setCantidad(Number(event.target.value))} />

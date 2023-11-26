@@ -10,7 +10,9 @@ export const useProfile = () => {
             email: data.email,
             username: data.email,
             ...(data.password && { password: data.password }),
+            //@ts-ignore
             direccion: data.direccion,
+            //@ts-ignore
             zona: data.zona,
         }).catch(response => {
             return response.response;

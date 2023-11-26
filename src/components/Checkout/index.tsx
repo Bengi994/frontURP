@@ -6,6 +6,7 @@ import {useCart} from "../Cart/useCart";
 // @ts-ignore
 import {useRouter} from "next/router";
 import {LoggedUser} from "../LoggedUser";
+import Link from "next/link";
 
 export const Checkout = () => {
     const { isLogged } = useResponsivePageContext();
@@ -24,7 +25,8 @@ export const Checkout = () => {
     };
 
     return cart && (
-        <CulqiProvider publicKey="pk_test_P9GPCOGFKONFkR5u"
+        //@ts-ignore
+        /*<CulqiProvider publicKey="pk_test_P9GPCOGFKONFkR5u"
                        title="SGAPP"
                        onToken={async (token: any) => {
                            const result = await buy(cart, user, token);
@@ -42,8 +44,10 @@ export const Checkout = () => {
                            console.log(error);
                            await router.push('/venta-fallida');
                        }} amount={(total * 100)}>
-        <div className='d-flex'>
-            <Culqi>
+        <div className='d-flex'>*/
+        {/*@ts-ignore*/}
+            /*<Culqi>
+                
                 {({ openCulqi }) => {
                     return (
                         <>
@@ -51,8 +55,8 @@ export const Checkout = () => {
                                 <LoggedUser onSubmit={handleOnSubmit} openCulqi={openCulqi} />
                             ) : (
                                 <div className={`flex-column ${showGuestForm ? 'd-none' : 'd-flex'}`}>
-                                    <p>Deseas seguir como invitado? o puedes iniciar sesion <a
-                                        href="/iniciar-sesion">aqui</a></p>
+                                    <p>Deseas seguir como invitado? o puedes iniciar sesion <Link
+                                        href="/iniciar-sesion">aqui</Link></p>
                                     <Button className='align-self-start' variant='light'
                                             onClick={() => setShowGuestForm(true)}>Seguir como invitado</Button>
                                 </div>
@@ -75,8 +79,10 @@ export const Checkout = () => {
                                     <tbody>
                                     {cart && cart.products.length > 0 && cart.products.map(product => (
                                         <tr key={`product-${product.id}`}>
+                                         
                                             <td>{product.nombre}</td>
                                             <td>{product.cantidad}</td>
+                                           
                                             <td>{product.precio}</td>
                                         </tr>
                                     ))}
@@ -106,8 +112,11 @@ export const Checkout = () => {
                             </div>
                         </>);
                 }}
+                
             </Culqi>
         </div>
-        </CulqiProvider>
+        
+        </CulqiProvider>*/
+    
     );
 };

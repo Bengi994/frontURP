@@ -5,7 +5,7 @@ import { useCatalogs } from "../hooks/catalog/useCatalogs";
 import { useState } from "react";
 import CatalogModal from "../components/CatalogModal";
 import { Catalog } from "../types/Catalog";
-
+import Image from 'next/image';
 
 const Catalogo = () => {
   const router = useRouter();

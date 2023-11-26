@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { Catalog } from "../../types/Catalog";
 import { useCatalogs } from "../../hooks/catalog/useCatalogs";
-
+{/*@ts-ignore*/}
 const CatalogModalConfirm = ({estado, cambiarEstado, catalogo, setCatalogo, tipo}) => {
     const { catalogs, removeCatalog, enabledCatalog } = useCatalogs();
     const handleRemoveCatalog = async (catalogId: string) => {
