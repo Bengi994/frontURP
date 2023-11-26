@@ -29,6 +29,7 @@ const ModalQR = ({ estado, cambiarEstado }) => {
             <div className="contenedorQR">
               <br />
               <br />
+              {/*@ts-ignore*/}
               <QRCode
                 className="codigoQR"
                 

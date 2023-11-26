@@ -19,6 +19,7 @@ import DatePicker from "react-datepicker";
 //import TimePicker from 'react-time-picker';
 import "react-datepicker/dist/react-datepicker.css";
 
+
 //import 'react-time-picker/dist/TimePicker.css';
 import axios from "axios";
 import { useSalonConferencia } from "../../hooks/salonConferencia/useSalonConferencia";
@@ -70,6 +71,51 @@ const NewCatalog = () => {
     }
     };
 
+    const diasNoHabiles = useMemo(() => {
+
+        const dias = catalogs.reduce((acc: Record<number,Date[]>, catalogs) => {
+            const salonId = catalogs?.salon?.data?.id;
+            const fecha = new Date(new Date (catalogs.fecha).toLocaleString('en', {timeZone: 'UTC'}))
+            if(acc[salonId]){
+            acc[salonId] = acc[salonId].concat(fecha);
+            return acc;
+            }
+            acc[salonId] = [fecha]
+            return acc
+        },{})
+        console.log(dias);
+        return dias
+
+    }, [catalogs]) 
+    
+
+    const handleOpenModal = () => setShowModal(true);
+
+    const handleCloseModal = () => setShowModal(false);
+
+    // const [selectedTime, setSelectedTime] = useState('');
+/*
+    useEffect(() => {
+        const getSalonConferencia = async () => {
+            const salones = await getSalonConferencia()
+            console.log(salones)
+        }
+        getSalonConferencia()
+    }, [])
+    */
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            await getSalonConferencia();
+          } catch (error) {
+            console.error('Error al obtener los datos:', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+    
+      console.log(SalonConferencia); // Imprime los datos en la consola
   const diasNoHabiles = useMemo(() => {
     const dias = catalogs.reduce((acc: Record<number, Date[]>, catalogs) => {
       const salonId = catalogs.salon.data.id;

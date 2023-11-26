@@ -4,6 +4,7 @@ import { useResponsivePageContext } from "../ResponsivePage/context";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
+const imagenPorDefecto = "https://res.cloudinary.com/dbe36qiba/image/upload/v1700542339/1_mcbxr_Q9dmg_X6v8_KA_7_Uo4nw_acc5422e6f.jpg";
 
 export const CatalogCardInscrito = ({ catalog }: { catalog: Catalog }) => {
   const { user } = useResponsivePageContext();
@@ -19,7 +20,7 @@ export const CatalogCardInscrito = ({ catalog }: { catalog: Catalog }) => {
   if(catalog.inscripciones != null){
     catalog.inscripciones.forEach(inscripcion => {
       if(inscripcion.codigo == user?.codigo){
-          if(inscripcion.asistencia == "Sí"){
+          if(inscripcion.asistencia == "Si"){
             estado = 'Asistió';
           }
           else{
@@ -62,10 +63,10 @@ export const CatalogCardInscrito = ({ catalog }: { catalog: Catalog }) => {
   return (
     <Card key={`catalog-${catalog.id}`}>
     <div className="cont-img">
-      <Card.Img
-        variant="top"
-        src={fotoUrl}
-      />
+    <Card.Img
+          variant="top"
+          src={catalog.foto?.data?.attributes.url || imagenPorDefecto}
+        />
     </div>
 
     <Card.Body className="card-body-inscrito">
@@ -86,7 +87,7 @@ export const CatalogCardInscrito = ({ catalog }: { catalog: Catalog }) => {
           </p>
 
           <p className="card-inscrito-texto">
-            <Image src="\salon-icon-black.svg" alt="salon" />
+            <img src="\salon-icon-black.svg" alt="salon" />
             {catalog?.salon.data?.attributes?.nombre === null ? "" : catalog.salon.data?.attributes?.nombre}
           </p>
         </div>

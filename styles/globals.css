@@ -89,10 +89,12 @@ h6 {
     width: 30px;
     margin: 0px 10px;
 }
-.acciones-defecto > img,
-.alumno-acciones > img{
+
+.acciones-defecto>img,
+.alumno-acciones>img {
     display: none;
 }
+
 .alumno-acciones {
     display: flex;
 }
@@ -101,6 +103,31 @@ h6 {
     display: block;
     margin: auto;
     margin-bottom: 30px !important;
+}
+
+.sidebar--admin {
+    background-color: #00823a;
+    border: none;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    padding: 15px;
+    z-index: 1000;
+    /* Asegura que el sidebar esté sobre otros elementos */
+    transition: transform 0.3s ease-in-out;
+    /* Suaviza la transición */
+}
+
+.sidebar-toggle {
+    background-color: transparent;
+}
+
+/* Estilos para pantallas menores de 767px */
+
+
+.sidebar--admin li a {
+    color: #fff;
 }
 
 .sidebar--admin hr {
@@ -706,26 +733,28 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60vh;
+    flex-wrap: wrap
 }
 
+
+.excepcion {
+    padding-top: 20px !important;
+}
 .seccion-mis-conferencias {
     display: flex;
     align-items: center;
     flex-direction: column;
     background-color: #ffffff;
     border-radius: 20px;
-    width: 341px;
     height: 360px;
     margin: 20px;
+    padding: 20px;
     padding-top: 70px;
     justify-content: space-around;
     box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
     position: relative;
-}
-
-.excepcion {
-    padding-top: 20px !important;
+    width: calc(100%/4);
+    min-width: 280px;
 }
 
 .seccion-mis-conferencias img {
@@ -748,6 +777,21 @@ button {
 .seccion-mis-conferencias a {
     text-decoration: none;
     color: #42B247;
+}
+@media (max-width: 767px) {
+    .contenido-mis-conferencias {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .seccion-mis-conferencias {
+        width: 100%;
+        margin: 10px 0;
+    }
+    [role="progressbar"]::before{
+        scale: .7;
+    }
+   
 }
 
 @keyframes progress {
@@ -1195,14 +1239,68 @@ textarea:focus {
     top: 10px;
 }
 
-.card{
+.card {
     position: relative;
 }
 
-.filtrado-comboBox{
+.filtrado-comboBox {
     display: flex;
     justify-content: space-evenly;
 }
-.filtrado-comboBox-seccion{
+
+.filtrado-comboBox-seccion {
     width: 400px;
+}
+
+@media (min-width: 767px) {
+
+    .sidebar-toggle,
+    .close-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar--admin {
+        width: 100%;
+        /* Ocupa todo el ancho de la pantalla */
+        transform: translateX(-100%);
+        /* Inicia fuera de la pantalla */
+    }
+
+    .sidebar--admin.active {
+        transform: translateX(0);
+        /* Mueve el sidebar a la vista */
+    }
+
+    .sidebar--admin {
+        /* ...estilos existentes */
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar--admin.active {
+        transform: translateX(0);
+    }
+
+    .close-sidebar {
+        background: transparent;
+        /* o el color que prefieras */
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .cabecera--principal {
+        width: 100%;
+    }
+    .contenedor-main{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .contenedor-main .iniciar-sesion-pg{
+        margin: 0;
+    }
 }

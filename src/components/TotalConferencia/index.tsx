@@ -15,7 +15,7 @@ export const TotalConferencia = () => {
             if(catalog.inscripciones != null){
                 catalog.inscripciones.forEach(inscripcion => {
                     if(inscripcion.codigo == user?.codigo) {
-                        if(inscripcion.asistencia == "Sí")
+                        if(inscripcion.asistencia == "Si")
                             conferenciaAsistio++;
                     }
                 });

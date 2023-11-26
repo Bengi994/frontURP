@@ -8,8 +8,12 @@ import {
   useResponsivePageDispatch,
 } from "../ResponsivePage/context";
 import Image from 'next/image';
+import { Accordion } from "react-bootstrap";
+
+import { useSidebarContext } from '../SideBar/SidebarContext';
 
 export const Header = () => {
+  const { toggleSidebar } = useSidebarContext();
   const [show, setShow] = useState(false);
   const router = useRouter();
   const { user, isLogged, isEmployee } = useResponsivePageContext();
@@ -31,6 +35,10 @@ export const Header = () => {
 
   const goToMyOrders = () => router.push("/mis-pedidos");
 
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+
   
   return (
     
@@ -40,7 +48,7 @@ export const Header = () => {
             <nav className="navbar navbar-expand-lg cabecera--principal">
 
 
-
+<button onClick={toggleSidebar} className="sidebar-toggle"><img src="\menu.svg" alt="Logo" /></button>
 
             <div className="acciones-defecto">
               <img src="\icon.svg" alt="Logo" />

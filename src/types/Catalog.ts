@@ -23,4 +23,6 @@ export type Inscripcion = {
     codigo: string;
     carrera: string;
     asistencia: string;
+    entrada: boolean;
+    salida: boolean;
 };

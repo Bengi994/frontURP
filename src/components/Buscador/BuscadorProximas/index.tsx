@@ -61,7 +61,7 @@ export const BuscadorProximas = () => {
           .toLowerCase()
           .includes(terminoBusqueda.toLowerCase())
           ||
-        catalog.dirigido
+        catalog.dirigido && catalog.dirigido
           .toString()
           .toLowerCase()
           .includes(terminoBusqueda.toLowerCase()) ||

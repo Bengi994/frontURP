@@ -11,6 +11,7 @@ const validationSchema = yup.object({
     passwordConfirmation: yup.string().oneOf([yup.ref("password"), null], "No coincide con la contraseña").required("Contraseña es requerido"),
 });
 
+
 const RestablecerContrasena = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<{ password: string; passwordConfirmation: string;}>({
         resolver: yupResolver(validationSchema),

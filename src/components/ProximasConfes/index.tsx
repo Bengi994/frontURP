@@ -112,6 +112,7 @@ const ProximasConfes = () => {
                 cambiarEstado={cambiarEstadoModal}
                 catalogo={cmt}
                 setCatalogo={setCatalogElement}
+                //@ts-ignore
                 estadoModalQR={estadoModalQR}
                 cambiarEstadoQR={cambiarEstadoModalQR}
               />

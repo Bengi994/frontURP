@@ -23,7 +23,7 @@ function formatearFecha(fechaOriginal) {
     return `${dia} de ${mes}`;
   }
 //@ts-ignore
-const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo}) => {
+const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo,estadoModalQR,cambiarEstadoQR}) => {
     const { user } = useResponsivePageContext();
     const { updateUser} = useUsers();
     const { register, handleSubmit, formState: { errors } } = useForm<Catalog>();
@@ -63,7 +63,9 @@ const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo}) => {
         apellido: user?.apellido,
         codigo: user?.codigo,
         carrera: user?.escuela,
-        asistencia: "No"
+        asistencia: "No",
+        entrada: false,
+        salida: false
       };
       // Obtén la lista de objetos actual del campo JSON
       let la;
@@ -77,23 +79,27 @@ const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo}) => {
       }
 
       function modificarInscripciones(listaDeAlumnos:any) {
+        let flag = false;
         if(listaDeAlumnos?.length == 0){
-          //@ts-ignore
           listaDeAlumnos.push(nuevoAlumno);
         }
         else{
+          //@ts-ignore
           listaDeAlumnos.forEach(alumno => {
             if(alumno.codigo != nuevoAlumno.codigo) {
-              //@ts-ignore
-              listaDeAlumnos.push(nuevoAlumno);
+              flag = true;
             }
             else{
               console.log("El alumno ya se inscrbio")
             }
           });
+          //@ts-ignore
+          if (flag == true){
+            listaDeAlumnos.push(nuevoAlumno);
+          }
         }
         return listaDeAlumnos;
-      }
+      }
   
       // Actualiza el campo JSON del catálogo con la lista actualizada
       const updatedCatalog = {
@@ -107,7 +113,7 @@ const ModalInscribir = ({ estado, cambiarEstado, catalogo, setCatalogo}) => {
       if (response) {
         console.log("Nuevo alumno registrado con éxito:", response);
         // Realiza cualquier otra acción necesaria después de la actualización.
-        cambiarEstadoModal(!estadoModal);
+        cambiarEstadoQR(!estadoModalQR);
       } else {
         console.error("Error al registrar al nuevo alumno.");
       }

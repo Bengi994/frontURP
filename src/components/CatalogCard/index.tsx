@@ -117,6 +117,7 @@ export const CatalogCard = ({ catalog }: { catalog: Catalog }) => {
         cambiarEstado={cambiarEstadoModal}
         catalogo={catalog}
         setCatalogo={setCatalogElement}
+        //@ts-ignore
         estadoModalQR = {estadoModalQR}
         cambiarEstadoQR = {cambiarEstadoModalQR}
       />
